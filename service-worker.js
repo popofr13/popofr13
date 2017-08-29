@@ -46,8 +46,10 @@ self.addEventListener('notificationclick', function(event) {
 });
 
 function askNotificationPermission() {
+  console.log("Ask notification");
+  
   return new Promise(function(resolve, reject) {
-    const permissionResult = Notification.requestPermission(function(result) {
+    const permissionResult = window.Notification.requestPermission(function(result) {
       resolve(result);
     });
 
