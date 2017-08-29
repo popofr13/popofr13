@@ -33,6 +33,14 @@ self.addEventListener('activate', function(event) {
   self.registration.showNotification("Install in progress", options);
 });
 
+self.addEventListener('push', function(event) {
+  console.log("Push event");
+  console.debug(event);
+  
+  const showNotificationPromise = self.registration.showNotification('Hello, World.');
+  event.waitUntil(showNotificationPromise);
+});
+
 self.addEventListener('notificationclick', function(event) {
   console.log('On notification click: ');
   
