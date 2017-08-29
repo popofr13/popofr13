@@ -53,7 +53,7 @@ Content of the document......
                 
                 console.log("[Index.html] Subscribe (and ask permission)");
                 
-                window.getElementById("divLog").appendChild(document.createTextNode("Service worker registered"));
+                document.getElementById("divLog").appendChild(document.createTextNode("Service worker registered"));
                 
                 registration.pushManager.subscribe({
                   userVisibleOnly: true,
