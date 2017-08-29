@@ -8,6 +8,21 @@
 <body>
 Content of the document......
 <script type="text/javascript">
+    function urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/\-/g, '+')
+            .replace(/_/g, '/');
+
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+
+        for (var i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+    }
+    
     function askNotificationPermission() {
       console.log("[Index.html] Ask notification");
 
@@ -35,6 +50,18 @@ Content of the document......
                 console.log('[ServiceWorker registration successful with scope: ', registration.scope);
                 
                 askNotificationPermission();
+                
+                console.log("[Index.html] Subscribe");
+                
+                registration.pushManager.subscribe({
+                  userVisibleOnly: true,
+                  applicationServerKey: urlBase64ToUint8Array(
+                    'BAS8_Xwo58Pq0UlQTt5z0NNzyqpyFG5BYODDB5N_Rsg-7FEzcI1cM-Y_hSNgyRQ_J9O3_NLi_xSxJ6UNQzA8ySg'
+                  )
+                }).then(function(pushSubscription) {
+                  console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+                  return pushSubscription;
+                });
             }, function(err) {
                 // registration failed :(
                 console.log('ServiceWorker registration failed: ', err);
