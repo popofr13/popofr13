@@ -3,7 +3,12 @@ self.addEventListener('install', function(event) {
   
   console.debug(event);
   
-  askNotificationPermission();  
+  console.log("Ask notification (new method)");
+  return Notification.requestPermission().then(function(permission) { 
+    console.debug(permission); 
+  });
+  
+  //askNotificationPermission();  
 });
 
 self.addEventListener('fetch', function(event) {
