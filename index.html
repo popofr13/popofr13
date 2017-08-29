@@ -43,9 +43,13 @@ Content of the document......
       });
     }
     
+    var serviceWorkerRegistration;
+    
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('/popofr13/service-worker.js').then(function(registration) {
+                serviceWorkerRegistration = registration;
+                
                 // Registration was successful
                 console.log('[ServiceWorker registration successful with scope: ', registration.scope);
                 
