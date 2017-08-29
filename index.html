@@ -49,9 +49,9 @@ Content of the document......
                 // Registration was successful
                 console.log('[ServiceWorker registration successful with scope: ', registration.scope);
                 
-                askNotificationPermission();
+                //askNotificationPermission();
                 
-                console.log("[Index.html] Subscribe");
+                console.log("[Index.html] Subscribe (and ask permission)");
                 
                 registration.pushManager.subscribe({
                   userVisibleOnly: true,
