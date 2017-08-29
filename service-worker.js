@@ -46,10 +46,12 @@ self.addEventListener('notificationclick', function(event) {
 });
 
 function askNotificationPermission() {
-  console.log("Ask notification");
+  console.log("Ask notification (with promise only)");
   
   console.debug(Notification);
   
+  return Notification.requestPermission().then(function(permission) { console.debug(permission); });
+  /*
   return new Promise(function(resolve, reject) {
     const permissionResult = Notification.requestPermission(function(result) {
       resolve(result);
@@ -64,4 +66,5 @@ function askNotificationPermission() {
       throw new Error('We weren\'t granted permission.');
     }
   });
+  */
 }
