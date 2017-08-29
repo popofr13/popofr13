@@ -2,13 +2,6 @@ self.addEventListener('install', function(event) {
   console.log("Install event");
   
   console.debug(event);
-  
-  console.log("Ask notification (new method)");
-  return Notification.requestPermission().then(function(permission) { 
-    console.debug(permission); 
-  });
-  
-  //askNotificationPermission();  
 });
 
 self.addEventListener('fetch', function(event) {
@@ -49,27 +42,3 @@ self.addEventListener('notificationclick', function(event) {
   // See: http://crbug.com/463146
   event.notification.close();
 });
-
-function askNotificationPermission() {
-  console.log("Ask notification (with promise only)");
-  
-  console.debug(Notification);
-  
-  return Notification.requestPermission().then(function(permission) { console.debug(permission); });
-  /*
-  return new Promise(function(resolve, reject) {
-    const permissionResult = Notification.requestPermission(function(result) {
-      resolve(result);
-    });
-
-    if (permissionResult) {
-      permissionResult.then(resolve, reject);
-    }
-  })
-  .then(function(permissionResult) {
-    if (permissionResult !== 'granted') {
-      throw new Error('We weren\'t granted permission.');
-    }
-  });
-  */
-}
